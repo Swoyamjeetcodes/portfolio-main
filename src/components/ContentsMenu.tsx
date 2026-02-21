@@ -63,7 +63,7 @@ const ContentsMenu = () => {
     <aside className="fixed left-[calc((50vw-19rem)/2)] top-1/2 z-40 hidden -translate-x-1/2 -translate-y-1/2 xl:block">
       <nav
         aria-label="Contents menu"
-        className="rounded-xl border border-border/70 bg-background/80 px-3 py-3 shadow-sm backdrop-blur"
+        className="rounded-xl border border-border/70 bg-background/80 px-3 py-3 shadow-sm backdrop-blur dark:border-emerald-500/30"
       >
         <ul className="space-y-2">
           {sections.map((section) => {
@@ -81,12 +81,16 @@ const ContentsMenu = () => {
                     history.replaceState(null, "", `#${section.id}`);
                   }}
                   className={`group flex items-center gap-2 text-sm transition-colors ${
-                    isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                    isActive
+                      ? "text-primary dark:text-emerald-300"
+                      : "text-muted-foreground hover:text-foreground dark:text-emerald-200/70 dark:hover:text-emerald-300"
                   }`}
                 >
                   <span
                     className={`h-2 w-2 rounded-full border border-border transition-all ${
-                      isActive ? "bg-primary border-primary scale-110" : "bg-transparent"
+                      isActive
+                        ? "bg-primary border-primary scale-110 dark:bg-emerald-400 dark:border-emerald-400"
+                        : "bg-transparent dark:border-emerald-500/45"
                     }`}
                   />
                   <span className="font-['Geist']">{section.label}</span>

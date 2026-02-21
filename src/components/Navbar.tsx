@@ -14,8 +14,7 @@ import {
   Twitter,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { type MouseEvent } from "react";
-import { useModeAnimation } from "react-theme-switch-animation";
+import { useEffect, useState, type MouseEvent } from "react";
 
 const navItems = [
   { label: "Home", href: "#home", icon: Home },
@@ -35,11 +34,21 @@ const socialItems = [
 ];
 
 const Navbar = () => {
-  const { ref: themeToggleRef, toggleSwitchTheme, isDarkMode } = useModeAnimation({
-    duration: 520,
-    easing: "cubic-bezier(0.16, 1, 0.3, 1)",
-    globalClassName: "dark",
-  });
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Always start in light mode for first render.
+    document.documentElement.classList.remove("dark");
+    setIsDarkMode(false);
+  }, []);
+
+  const toggleTheme = () => {
+    setIsDarkMode((prev) => {
+      const next = !prev;
+      document.documentElement.classList.toggle("dark", next);
+      return next;
+    });
+  };
 
   const handleSectionScroll = (
     event: MouseEvent<HTMLAnchorElement>,
@@ -101,8 +110,7 @@ const Navbar = () => {
             <li className="mx-1 h-6 w-px bg-border/80" aria-hidden="true" />
             <li className="flex-shrink-0">
               <button
-                ref={themeToggleRef}
-                onClick={toggleSwitchTheme}
+                onClick={toggleTheme}
                 className="inline-flex size-8 md:size-9 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors duration-200 hover:bg-secondary hover:text-foreground"
                 aria-label="Toggle theme"
                 title="Toggle theme"
