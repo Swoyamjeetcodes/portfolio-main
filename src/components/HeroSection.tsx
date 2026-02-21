@@ -1,33 +1,42 @@
 import { motion } from "framer-motion";
 
+const getModernImageSources = (jpgPath: string) => {
+  const basePath = jpgPath.replace(/\.jpg$/i, "");
+  return {
+    avif: `${basePath}.avif`,
+    webp: `${basePath}.webp`,
+    jpg: jpgPath,
+  };
+};
+
 const galleryImages = [
   {
-    src: "/images/IMG_20260202_212216.jpg",
+    src: "/images/IMG_20260202_212216-hero.jpg",
     alt: "Portrait",
     className: "md:col-start-1 md:row-start-1 md:row-span-2",
   },
   {
-    src: "/images/IMG_20250214_210749.jpg",
+    src: "/images/IMG_20250214_210749-hero.jpg",
     alt: "Award photo",
     className: "md:col-start-1 md:row-start-3 md:row-span-2",
   },
   {
-    src: "/images/IMG_20250221_132857.jpg",
+    src: "/images/IMG_20250221_132857-hero.jpg",
     alt: "Group photo",
     className: "md:col-start-2 md:row-start-1",
   },
   {
-    src: "/images/20250501_181607.jpg",
+    src: "/images/20250501_181607-hero.jpg",
     alt: "Cafe portrait",
     className: "md:col-start-2 md:row-start-2 md:row-span-3",
   },
   {
-    src: "/images/IMG_20240809_122212.jpg",
+    src: "/images/IMG_20240809_122212-hero.jpg",
     alt: "Event portrait",
     className: "md:col-start-3 md:row-start-1 md:row-span-2",
   },
   {
-    src: "/images/IMG_20260122_170937.jpg",
+    src: "/images/IMG_20260122_170937-hero.jpg",
     alt: "Outdoor portrait",
     className: "md:col-start-3 md:row-start-3 md:row-span-2",
   },
@@ -67,13 +76,22 @@ const HeroSection = () => {
               products while learning in public and collaborating on real-world projects.
             </p>
             <figure className="w-44 shrink-0 overflow-hidden rounded-xl border border-border bg-card">
-              <img
-                src="/images/20250501_181607.jpg"
-                alt="Cafe portrait"
-                className="block h-auto w-full"
-                loading="lazy"
-                decoding="async"
-              />
+              {(() => {
+                const mobileImage = getModernImageSources("/images/20250501_181607-hero.jpg");
+                return (
+                  <picture>
+                    <source srcSet={mobileImage.avif} type="image/avif" />
+                    <source srcSet={mobileImage.webp} type="image/webp" />
+                    <img
+                      src={mobileImage.jpg}
+                      alt="Cafe portrait"
+                      className="block h-auto w-full"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
+                );
+              })()}
             </figure>
           </div>
         </motion.div>
@@ -99,14 +117,23 @@ const HeroSection = () => {
               key={image.src}
               className={`group overflow-hidden rounded-xl border border-border bg-card ${image.className}`}
             >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="block h-full w-full object-cover object-center scale-[1] transform-gpu transition-transform duration-500 ease-out will-change-transform motion-reduce:transform-none motion-reduce:transition-none group-hover:scale-[1.7]"
-                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-                loading="lazy"
-                decoding="async"
-              />
+              {(() => {
+                const modernImage = getModernImageSources(image.src);
+                return (
+                  <picture>
+                    <source srcSet={modernImage.avif} type="image/avif" />
+                    <source srcSet={modernImage.webp} type="image/webp" />
+                    <img
+                      src={modernImage.jpg}
+                      alt={image.alt}
+                      className="block h-full w-full object-cover object-center scale-[1] transform-gpu transition-transform duration-500 ease-out will-change-transform motion-reduce:transform-none motion-reduce:transition-none group-hover:scale-[1.7]"
+                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
+                );
+              })()}
             </figure>
           ))}
         </motion.div>
