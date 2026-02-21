@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap');
+
+@font-face {
+  font-family: 'Alice';
+  src: url('/fonts/Alice.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 35% 16%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 35% 16%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 35% 16%;
+
+    --primary: 219 86% 58%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 35 35% 93%;
+    --secondary-foreground: 222 28% 22%;
+
+    --muted: 35 25% 92%;
+    --muted-foreground: 220 10% 42%;
+
+    --accent: 212 100% 96%;
+    --accent-foreground: 222 35% 16%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 18% 84%;
+    --input: 220 18% 84%;
+    --ring: 219 86% 58%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 35% 16%;
+    --sidebar-primary: 219 86% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 35 35% 93%;
+    --sidebar-accent-foreground: 222 35% 16%;
+    --sidebar-border: 220 18% 84%;
+    --sidebar-ring: 219 86% 58%;
+
+    --font-heading: 'Alice', serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 210 40% 96%;
+
+    --card: 0 0% 4%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 0 0% 4%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 210 95% 67%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 0 0% 8%;
+    --secondary-foreground: 210 34% 90%;
+
+    --muted: 0 0% 8%;
+    --muted-foreground: 215 20% 70%;
+
+    --accent: 0 0% 10%;
+    --accent-foreground: 210 40% 96%;
+
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 210 40% 96%;
+
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 210 95% 67%;
+
+    --sidebar-background: 0 0% 2%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 210 95% 67%;
+    --sidebar-primary-foreground: 222 47% 11%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 210 95% 67%;
+  }
+}
+
+@layer base {
+  #root {
+    position: relative;
+    z-index: 1;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Geist', sans-serif;
+    color-scheme: light;
+    background-image:
+      radial-gradient(circle at 20% 10%, hsl(0 0% 100%) 0%, transparent 30%),
+      radial-gradient(circle at 85% 0%, hsl(0 0% 100%) 0%, transparent 35%);
+    background-color: hsl(0 0% 100%);
+    background-attachment: fixed;
+  }
+
+  .dark body {
+    color-scheme: dark;
+    background-image:
+      radial-gradient(circle at 20% 10%, hsl(210 95% 67% / 0.12) 0%, transparent 32%),
+      radial-gradient(circle at 85% 0%, hsl(188 88% 46% / 0.08) 0%, transparent 34%);
+    background-color: hsl(0 0% 0%);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  ::selection {
+    background: hsl(219 86% 58% / 0.24);
+    color: hsl(222 35% 16%);
+  }
+
+  .dark ::selection {
+    background: hsl(210 95% 67% / 0.35);
+    color: hsl(210 40% 96%);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(35 25% 94%);
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    background: hsl(223 22% 14%);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(220 16% 74%);
+    border-radius: 3px;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: hsl(223 16% 38%);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(219 86% 58% / 0.5);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    html,
+    body,
+    a,
+    button,
+    [role="button"],
+    input,
+    textarea,
+    select,
+    label {
+      cursor: none !important;
+    }
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(219 86% 58%), hsl(188 88% 46%));
+  }
+
+  .glow-sm {
+    box-shadow: 0 0 20px -5px hsl(219 86% 58% / 0.25);
+  }
+
+  .glow-border {
+    border-color: hsl(219 86% 58% / 0.3);
+  }
+
+  .section-fade {
+    @apply opacity-0 translate-y-6;
+  }
+
+  .text-gray-shift {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      120deg,
+      hsl(220 12% 24%),
+      hsl(220 10% 46%),
+      hsl(220 12% 24%)
+    );
+    background-size: 200% 100%;
+    animation: gray-shift 1.5s ease-in-out infinite;
+  }
+
+  .dark .text-gray-shift {
+    background-image: linear-gradient(
+      120deg,
+      hsl(220 18% 82%),
+      hsl(210 25% 96%),
+      hsl(220 18% 82%)
+    );
+  }
+
+  @keyframes gray-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .open-source-wrap {
+    font-family: 'Geist', sans-serif;
+  }
+
+  .open-source-wrap [class*="_themeToggleWrapper_"] {
+    display: none !important;
+  }
+
+  .open-source-wrap [class*="_card_"] {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 1.25rem !important;
+    border-radius: 0.75rem !important;
+    border: 1px solid hsl(var(--border)) !important;
+    background: hsl(var(--card)) !important;
+    box-shadow: none !important;
+    color: hsl(var(--foreground)) !important;
+    font-family: 'Geist', sans-serif !important;
+  }
+
+  .open-source-wrap [class*="_name_"] {
+    font-family: 'Alice', serif !important;
+  }
+
+  .open-source-wrap [class*="_sectionTitle_"] {
+    display: none !important;
+  }
+
+  .open-source-wrap [class*="_bio_"],
+  .open-source-wrap [class*="_username_"],
+  .open-source-wrap [class*="_statLabel_"],
+  .open-source-wrap [class*="_contributionCount_"],
+  .open-source-wrap [class*="_prMeta_"],
+  .open-source-wrap [class*="_categoryTitle_"],
+  .open-source-wrap [class*="_prTitle_"] {
+    font-family: 'Geist', sans-serif !important;
+  }
+
+  .open-source-wrap [class*="_button_"] {
+    border-radius: 0.5rem !important;
+    border: 1px solid hsl(var(--border)) !important;
+    background: hsl(var(--primary)) !important;
+    color: hsl(var(--primary-foreground)) !important;
+    font-family: 'Geist', sans-serif !important;
+  }
+
+  .open-source-wrap [class*="_bio_"] {
+    position: relative;
+    color: transparent !important;
+  }
+
+  .open-source-wrap [class*="_bio_"]::before {
+    content: "Open Source Contributions";
+    color: hsl(var(--foreground));
+    position: absolute;
+    inset: 0;
+    text-align: center;
+    font-family: 'Alice', serif;
+    font-size: 1.8rem;
+    line-height: 1.25;
+  }
+}
