@@ -1,5 +1,6 @@
 import {
   BadgeCheck,
+  Briefcase,
   Code2,
   FolderKanban,
   GitPullRequest,
@@ -20,6 +21,7 @@ const navItems = [
   { label: "Home", href: "#home", icon: Home },
   { label: "About", href: "#about", icon: UserRound },
   { label: "Projects", href: "#projects", icon: FolderKanban },
+  { label: "Experience", href: "#experience", icon: Briefcase },
   { label: "Open Source", href: "#open-source", icon: GitPullRequest },
   { label: "Certifications", href: "#certifications", icon: BadgeCheck },
   { label: "Skills", href: "#skills", icon: Code2 },

@@ -1,33 +1,18 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { Building2, Calendar, MapPin } from "lucide-react";
 
 const experiences = [
   {
-    role: "Software Engineer",
-    company: "Company Name",
-    companyUrl: "#",
-    period: "Jan 2024 — Present",
+    role: "Junior Software Engineer",
+    company: "EPAM Systems",
+    companyUrl: "https://www.epam.com",
+    logo: "/images/epam.jpg",
+    location: "India",
+    period: "Jun 2025 — Present",
     description:
-      "Built scalable APIs and microservices. Improved system performance by 40% through caching optimizations. Led migration to cloud-native architecture.",
-    tech: ["React", "TypeScript", "Node.js", "AWS"],
-  },
-  {
-    role: "Full Stack Developer",
-    company: "Previous Co.",
-    companyUrl: "#",
-    period: "Jun 2022 — Dec 2023",
-    description:
-      "Developed interactive web platforms using modern frameworks. Improved cross-device UX with responsive design and led UI/UX upgrades across the platform.",
-    tech: ["Next.js", "PostgreSQL", "Tailwind CSS", "Docker"],
-  },
-  {
-    role: "Frontend Developer Intern",
-    company: "Startup Inc.",
-    companyUrl: "#",
-    period: "Jan 2022 — May 2022",
-    description:
-      "Built reusable component library and implemented pixel-perfect designs. Reduced bundle size by 30% through code-splitting and lazy loading.",
-    tech: ["React", "JavaScript", "SCSS", "Firebase"],
+      "Working as a Junior Software Engineer, contributing to enterprise-level software development projects. Collaborating with cross-functional teams to deliver high-quality solutions for clients.",
+    tech: ["JavaScript", "React", "MongoDB", "Express", "AWS"],
   },
 ];
 
@@ -48,40 +33,76 @@ const ExperienceSection = () => {
           <h3 className="text-3xl font-bold">Where I've worked</h3>
         </motion.div>
 
-        <div className="space-y-3">
+        <div className="relative">
+          {/* Timeline line - positioned on the left */}
+          <div className="absolute left-4 top-0 bottom-0 w-px bg-border" />
+
           {experiences.map((exp, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="p-4 rounded-xl bg-card border border-border"
+              className="relative pl-12 mb-8 last:mb-0"
             >
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 mb-2">
-                <div className="text-center md:text-left">
-                  <h4 className="font-['Geist'] font-semibold text-lg text-foreground">{exp.role}</h4>
-                  <a href={exp.companyUrl} className="text-sm text-primary hover:underline">
-                    {exp.company}
-                  </a>
+              {/* Timeline dot */}
+              <div className="absolute left-4 -translate-x-1/2 top-0 w-2 h-2 rounded-full bg-primary ring-4 ring-background" />
+
+              {/* Content */}
+              <div>
+                <div className="p-4 rounded-xl bg-card border border-border hover:border-primary/50 transition-colors">
+                  {/* Header with logo and company */}
+                  <div className="flex items-start gap-3 mb-3">
+                    <div className="w-12 h-12 rounded-lg bg-white p-1 flex-shrink-0 flex items-center justify-center border border-border overflow-hidden">
+                      <img
+                        src={exp.logo}
+                        alt={`${exp.company} logo`}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-['Geist'] font-semibold text-lg text-foreground leading-tight">
+                        {exp.role}
+                      </h4>
+                      <a
+                        href={exp.companyUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-primary hover:underline font-medium"
+                      >
+                        {exp.company}
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Meta info */}
+                  <div className="flex flex-wrap items-center gap-3 mb-3 text-muted-foreground">
+                    <span className="flex items-center gap-1.5 text-xs font-mono">
+                      <Calendar className="w-3.5 h-3.5" />
+                      {exp.period}
+                    </span>
+                    <span className="flex items-center gap-1.5 text-xs font-mono">
+                      <MapPin className="w-3.5 h-3.5" />
+                      {exp.location}
+                    </span>
+                  </div>
+
+                  <p className="text-sm text-secondary-foreground leading-relaxed mb-3">
+                    {exp.description}
+                  </p>
+
+                  {/* Tech stack */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {exp.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="px-2 py-0.5 text-xs font-mono rounded bg-secondary text-secondary-foreground border border-border"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <span className="font-mono text-xs text-muted-foreground whitespace-nowrap">
-                  {exp.period}
-                </span>
-              </div>
-
-              <p className="text-base text-secondary-foreground leading-relaxed mb-3 text-center md:text-left">
-                {exp.description}
-              </p>
-
-              <div className="flex flex-wrap justify-center md:justify-start gap-1.5">
-                {exp.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="px-2 py-0.5 text-xs font-mono rounded bg-secondary text-secondary-foreground border border-border"
-                  >
-                    {t}
-                  </span>
-                ))}
               </div>
             </motion.div>
           ))}

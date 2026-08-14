@@ -4,6 +4,7 @@ const sections = [
   { id: "home", label: "Intro" },
   { id: "about", label: "About" },
   { id: "projects", label: "Projects" },
+  { id: "experience", label: "Experience" },
   { id: "open-source", label: "Open Source" },
   { id: "certifications", label: "Certifications" },
   { id: "skills", label: "Skills" },
@@ -80,18 +81,16 @@ const ContentsMenu = () => {
                     target.scrollIntoView({ behavior: "smooth", block: "start" });
                     history.replaceState(null, "", `#${section.id}`);
                   }}
-                  className={`group flex items-center gap-2 text-sm transition-colors ${
-                    isActive
+                  className={`group flex items-center gap-2 text-sm transition-colors ${isActive
                       ? "text-primary dark:text-emerald-300"
                       : "text-muted-foreground hover:text-foreground dark:text-emerald-200/70 dark:hover:text-emerald-300"
-                  }`}
+                    }`}
                 >
                   <span
-                    className={`h-2 w-2 rounded-full border border-border transition-all ${
-                      isActive
+                    className={`h-2 w-2 rounded-full border border-border transition-all ${isActive
                         ? "bg-primary border-primary scale-110 dark:bg-emerald-400 dark:border-emerald-400"
                         : "bg-transparent dark:border-emerald-500/45"
-                    }`}
+                      }`}
                   />
                   <span className="font-['Geist']">{section.label}</span>
                 </a>
